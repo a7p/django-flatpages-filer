@@ -31,8 +31,10 @@ class FlatPageImage(models.Model):
     image = FilerImageField(null=True, blank=True)
 
     def __unicode__(self):
-        if self.image:
+        try:
             return "![%s][%s]" % (self.image.label, self.image.pk)
+        except AttributeError:
+            return ""
 
     class Meta:
         verbose_name = "Image"
